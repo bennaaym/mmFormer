@@ -1,0 +1,39 @@
+experiment:
+  name: mmformer_brats2024
+  fold: 2
+  seed: 1024
+
+data:
+  data_dir: /net/cremi/abennabi/espaces/travail/trdp/SwinUNETR/data/brats2024
+  json_list: /net/cremi/abennabi/espaces/travail/trdp/SwinUNETR/jsons/brats2024_folds.json
+  swin_repo: /net/cremi/abennabi/espaces/travail/trdp/SwinUNETR
+  workers: 8
+
+model:
+  roi: 96
+
+training:
+  batch_size: 1
+  epochs: 300
+  optimizer: adam_amsgrad
+  learning_rate: 0.0002
+  weight_decay: 0.0001
+  scheduler: poly
+
+validation:
+  every: 10
+  sliding_window_batch_size: 1
+  overlap: 0.5
+
+checkpoint:
+  resume: null
+
+output:
+  save_dir: runs/mmformer_brats2024/fold_2
+
+runtime:
+  device: cuda
+
+sanity:
+  only: false
+  skip_forward: false
